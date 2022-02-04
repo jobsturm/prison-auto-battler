@@ -29,7 +29,7 @@ function punchExchange({ inmateLeftDeck, inmaterRightDeck }:PunchExchangeInterfa
 
     return inmates;
 }
-// The incinerator I guess
+// ...the incinerator I guess
 function trimTheDead({ leftDeck, rightDeck }:DecksInterface):DecksInterface {
     return {
         leftDeck: leftDeck.filter((inmate: Inmate) => !inmate.isDead()),
