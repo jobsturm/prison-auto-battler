@@ -1,5 +1,5 @@
-import Inmate from '../Inmate';
-import Item from './Item';
+import Inmate from '../../Inmate';
+import Item from '../Item';
 
 export default class Weapon extends Item {
     isWeapon: true;

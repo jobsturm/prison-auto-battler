@@ -1,4 +1,4 @@
-import Inmate from '../Inmate';
+import Inmate from '../../Inmate';
 import Weapon from './Weapon';
 
 export default class RangedWeapon extends Weapon {

@@ -39,6 +39,7 @@ import Shooter from './classes/shooter/Shooter';
 import DecksInterface from './classes/DecksInterface';
 import turn from './functions/turn';
 import InmateHolder from './components/InmateHolder.vue';
+import WaterHose from '@/classes/items/weapons/WaterHose'
 
 @Component({
   components: { InmateHolder },
@@ -51,6 +52,8 @@ export default class App extends Vue {
 
   constructor() {
     super();
+
+    this.decks.rightDeck[0].giveItem(new WaterHose(this.decks.rightDeck[0]))
   }
 
   get isDraw():boolean {

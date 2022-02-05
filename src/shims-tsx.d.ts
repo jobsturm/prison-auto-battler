@@ -3,7 +3,7 @@ import Inmate from './classes/Inmate';
 
 declare global {
   interface AttackFunction {
-    (inmate: Inmate): void;
+    (deck: Inmate[]): void;
   }  
   namespace JSX {
     // tslint:disable no-empty-interface

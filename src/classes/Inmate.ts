@@ -1,7 +1,7 @@
 import { Component } from "vue/types/umd";
 import { faker } from '@faker-js/faker';
 import Item from "./items/Item";
-import Weapon from "./items/Weapon";
+import Weapon from "./items/weapons/Weapon";
 
 export default class Inmate {
     hp: number;
@@ -34,12 +34,10 @@ export default class Inmate {
         this.item = item;
     }
     attackFunction(opposingDeck: Array<Inmate>):void {
-        let receivingInmate = opposingDeck[0];
         if (this.weapon) {
-            if (this.weapon.isRanged) receivingInmate = opposingDeck[Math.floor(opposingDeck.length * Math.random())];
-            this.weapon.attackFunction(receivingInmate);
+            this.weapon.attackFunction(opposingDeck);
         } else {
-            this.punch(receivingInmate);
+            this.punch(opposingDeck[0]);
         }
     }
     get isDead():boolean {
