@@ -37,7 +37,6 @@ export default class Inmate {
         let receivingInmate = opposingDeck[0];
         if (this.weapon) {
             if (this.weapon.isRanged) receivingInmate = opposingDeck[Math.floor(opposingDeck.length * Math.random())];
-            console.log(receivingInmate);
             this.weapon.attackFunction(receivingInmate);
         } else {
             this.punch(receivingInmate);
