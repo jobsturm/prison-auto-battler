@@ -35,6 +35,7 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import Brawler from './classes/brawler/Brawler';
+import Shooter from './classes/shooter/Shooter';
 import DecksInterface from './classes/DecksInterface';
 import turn from './functions/turn';
 import InmateHolder from './components/InmateHolder.vue';
@@ -44,18 +45,18 @@ import InmateHolder from './components/InmateHolder.vue';
 })
 export default class App extends Vue {
   decks = {
-    leftDeck: [new Brawler(8, 2), new Brawler, new Brawler, new Brawler(4, 4), new Brawler(3, 3)],
-    rightDeck: [new Brawler, new Brawler(3, 3), new Brawler(10, 2), new Brawler, new Brawler(3, 3)],
+    leftDeck: [new Shooter, new Brawler, new Brawler, new Brawler(4, 4), new Brawler(3, 3)],
+    rightDeck: [new Brawler, new Brawler, new Brawler, new Brawler, new Brawler(5, 5)],
   } as DecksInterface;
 
   constructor() {
     super();
   }
 
-  get isDraw() {
+  get isDraw():boolean {
     return (this.decks.leftDeck.length + this.decks.rightDeck.length === 0);
   }
-  get winner() {
+  get winner():string|null {
     if (this.decks.leftDeck.length + this.decks.rightDeck.length === 0) null;
     if (this.decks.leftDeck.length === 0) return 'right';
     if (this.decks.rightDeck.length === 0) return 'left';
