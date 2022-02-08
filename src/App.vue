@@ -6,7 +6,7 @@
     <p v-else>{{ winner }} wins</p>
     <hr/>
     <main class="main">
-      <section v-if="decks.leftDeck">
+      <section v-if="decks.leftDeck" class="deck deck--reverse">
         <inmate-holder
           v-for="({ inmateComponent, ...inmateProps }, index) in decks.leftDeck"
           :key="`inmate-left-${index}`"
@@ -14,10 +14,11 @@
         >
           <component
             :is="inmateComponent"
+            v-bind="inmateProps"
           />
         </inmate-holder>
       </section>
-      <section v-if="decks.rightDeck">
+      <section v-if="decks.rightDeck" class="deck">
         <inmate-holder
           v-for="({ inmateComponent, ...inmateProps }, index) in decks.rightDeck"
           :key="`inmate-right-${index}`"
@@ -25,6 +26,7 @@
         >
           <component
             :is="inmateComponent"
+            v-bind="inmateProps"
           />
         </inmate-holder>
       </section>
@@ -46,13 +48,12 @@ import WaterHose from '@/classes/items/weapons/WaterHose'
 })
 export default class App extends Vue {
   decks = {
-    leftDeck: [new Shooter, new Brawler, new Brawler, new Brawler(4, 4), new Brawler(3, 3)],
-    rightDeck: [new Brawler, new Brawler, new Brawler, new Brawler, new Brawler(5, 5)],
+    leftDeck: [new Shooter, new Brawler, new Brawler(25, 25), new Brawler(4, 4), new Brawler(6, 5)],
+    rightDeck: [new Brawler, new Brawler(25, 25), new Shooter, new Brawler, new Brawler(5, 50)],
   } as DecksInterface;
 
   constructor() {
     super();
-
     this.decks.rightDeck[0].giveItem(new WaterHose(this.decks.rightDeck[0]))
   }
 
@@ -79,5 +80,13 @@ main {
 }
 section {
   width: 50%;
+}
+.deck {
+  display: flex;
+  justify-content: space-between;
+  justify-content: flex-start;
+}
+.deck--reverse {
+  flex-direction: row-reverse;
 }
 </style>

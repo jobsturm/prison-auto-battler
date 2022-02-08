@@ -6,11 +6,13 @@ import Weapon from "./items/weapons/Weapon";
 export default class Inmate {
     hp: number;
     power: number;
-    lastDamageTaken: 0;
     aim: number;
+    damageHistory: Array<number>;
+    gender: 'male'|'female';
     name: string;
     type: string;
     item: Item|null;
+    skinColor: string;
     inmateComponent: Component;
 
     constructor(type: string, hp: number, power: number, aim: number, inmateComponent: Component) {
@@ -18,14 +20,17 @@ export default class Inmate {
         this.hp = hp;
         this.power = power;
         this.aim = aim;
-        this.name = faker.name.findName();
+        this.damageHistory = [];
+        this.gender = Math.random() > 0.5 ? 'male' : 'female';
+        this.name = faker.name.firstName(this.gender);
         this.item = null;
         this.inmateComponent = inmateComponent;
+        const skinColors = ['#8d5524','#c68642','#e0ac69','#f1c27d','#ffdbac'];
+        this.skinColor = skinColors[Math.floor(Math.random() * skinColors.length)];
     }
     onPunched(power:number):void {
-        this.lastDamageTaken = 0;
         this.hp -= power;
-        this.lastDamageTaken += power;
+        this.damageHistory.push(power);
     }
     punch(inmate:Inmate):void {
         inmate.onPunched(this.power);
